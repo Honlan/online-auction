@@ -1,0 +1,81 @@
+<style>
+#auction {
+    padding: 30px 40px;
+    background-color: #f4f4f4;
+}
+
+#auction h2 {
+    font-size: 16px;
+}
+
+#auction a {
+    text-decoration: none;
+}
+#auction .list {
+	width: 100%;
+	margin-left: -2%;
+}
+#auction .item {
+    width: 46%;
+    margin-right: 2%;
+    margin-left: 2%;
+    display: inline-block;
+    position: relative;
+}
+
+#auction .item img {
+    width: 100%;
+}
+#auction .item p {
+	text-align: center;
+	background-color: rgba(250,250,250,0.8);
+	color: #D65021;
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 0;
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+</style>
+<div id="auction">
+    <div id="donation">
+        <h2>本次拍卖会获得了众多创新企业的支持，捐赠的慈善拍品如下</h2>
+        <div class="list">
+            <foreach name="donation" item="v">
+                <div class="item">
+                    <a href="{:U('Index/detail',array('id'=>$v['id']))}">
+                        <img src="__PUBLIC__{$v.thumbnail}">
+                        <p>{$v.title}</p>
+                    </a>
+                </div>
+            </foreach>
+        </div>
+    </div>
+    <div id="children">
+        <h2>同时来自春晖大家庭的孩子们也捐出了自己美丽的画作</h2>
+        <div class="list">
+            <foreach name="children" item="v">
+                <div class="item">
+                    <a href="{:U('Index/detail',array('id'=>$v['id']))}">
+                        <img src="__PUBLIC__{$v.thumbnail}">
+                        <p>{$v.title}</p>
+                    </a>
+                </div>
+            </foreach>
+        </div>
+    </div>
+    <div id="chba">
+        <h2>春晖博爱的CEO也捐出了自己的时间</h2>
+        <div class="list">
+            <foreach name="ceo" item="v">
+                <div class="item">
+                    <a href="{:U('Index/detail',array('id'=>$v['id']))}">
+                        <img src="__PUBLIC__{$v.thumbnail}">
+                        <p>{$v.title}</p>
+                    </a>
+                </div>
+            </foreach>
+        </div>
+    </div>
+</div>
