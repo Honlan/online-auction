@@ -1,7 +1,7 @@
 <style>
 #detail {
     background-color: #f4f4f4;
-    padding: 30px 40px;
+    padding: 40px 40px 30px 40px;
 }
 
 #detail #section1 {
@@ -12,6 +12,10 @@
 #detail #highest {
     font-size: 30px;
     color: red;
+    margin-left: 10px;
+}
+
+#detail #owner {
     margin-left: 10px;
 }
 
@@ -45,22 +49,24 @@
 }
 
 #detail #section2 {
-    padding: 30px 50px;
+    padding: 30px 0px;
     border-bottom: 1px solid #D65021;
     display: none;
 }
 
 #detail #section2 form {
-	width: 80%;
-	margin-left: 10%;
-	margin-right: 10%;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
+
 #detail #section2 form p {
-	text-align: center;
-	margin-top: 35px;
+    text-align: center;
+    margin-top: 10px;
 }
+
 #detail #section2 #apply {
-	color: #D65021;
+    color: #D65021;
     border: 1px solid #D65021;
     padding: 10px 15px;
     border-radius: 5px;
@@ -69,89 +75,86 @@
 #detail #section2 form .input-group {
     margin-bottom: 20px;
 }
+
 #detail #section3 {
-	padding: 20px 10px;
+    padding: 20px 10px;
 }
+
 #detail #section3 p {
-	text-indent: 2em;
+    text-indent: 2em;
 }
 </style>
 <div id="detail">
     <div id="section1">
-        <div class="row">
-            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
-                <div class="item_imgs">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <img src="__PUBLIC__/{$item['thumbnail']}">
-                            </div>
-                            <foreach name="item.imgs" item="i">
-                                <div class="item">
-                                    <img src="__PUBLIC__/{$i}">
-                                </div>
-                            </foreach>
-                        </div>
-                        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+        <div class="item_imgs">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="__PUBLIC__/{$item['thumbnail']}">
                     </div>
+                    <foreach name="item.imgs" item="i">
+                        <div class="item">
+                            <img src="__PUBLIC__/{$i}">
+                        </div>
+                    </foreach>
                 </div>
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-                <div class="item_basic_info">
-                    <h3>{$item.title}</h3>
-                    <p>最高价<span id="highest">¥ {$item.highest}</span></p>
-                    <p>起拍价<span id="start">¥ {$item.start}</span></p>
-                    <p>捐赠者<span id="donator">{$item.donator}</span></p>
-                    <p>拍卖状态<span id="status">
-            		<if condition="$item.deadline gt $now">
-            			拍卖中
-            		<else/>
-            			已结束
-            		</if>
-            	</span></p>
-                    <p>距离结束还有<span id="deadline" style="display:none;">{$item.deadline}</span><span id="timeleft"></span></p>
-                    <p id="want"><span>我要出价</span></p>
-                </div>
-            </div>
+        </div>
+        <div class="item_basic_info">
+            <h3>{$item.title}</h3>
+            <p>最高价<span id="highest">¥ {$item.highest}</span></p>
+            <p>出价者<span id="owner">{$item.owner}</span></p>
+            <p>起拍价<span id="start">¥ {$item.start}</span></p>
+            <p>捐赠者<span id="donator">{$item.donator}</span></p>
+            <p>拍卖状态<span id="status">
+                    <if condition="$item.deadline gt $now">
+                        拍卖中
+                    <else/>
+                        已结束
+                    </if>
+                </span></p>
+            <p>距离结束还有<span id="deadline" style="display:none;">{$item.deadline}</span><span id="timeleft"></span></p>
+            <p id="want"><span>我要出价</span></p>
         </div>
     </div>
     <div id="section2">
         <form>
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-fire"></span></div>
-                <input type="text" class="form-control" name="price" placeholder="出价 price">
+                <input type="text" class="form-control" name="price" placeholder="出价 price" value="{$item['highest']}">
             </div>
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
-                <input type="text" class="form-control" name="name" placeholder="姓名 Name">
+                <input type="text" class="form-control" name="name" placeholder="姓名 Name" value="{$name}">
             </div>
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></div>
-                <input type="tel" class="form-control" name="mobile" placeholder="手机 Mobile">
+                <input type="tel" class="form-control" name="mobile" placeholder="手机 Mobile" value="{$mobile}">
             </div>
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></div>
-                <input type="text" class="form-control" name="company" placeholder="公司 Company">
+                <input type="text" class="form-control" name="company" placeholder="公司 Company" value="{$company}">
             </div>
-            <div class="input-group">
+            <div class="input-group" style="margin-bottom:35px;">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-flag"></span></div>
-                <input type="text" class="form-control" name="position" placeholder="职位 Position">
+                <input type="text" class="form-control" name="position" placeholder="职位 Position" value="{$position}">
             </div>
-            <p><span id="apply">立即报名</span></p>
+            <p><span id="apply">立即出价</span></p>
         </form>
     </div>
     <div id="section3">
-    	<h3>拍品介绍</h3>
-    	<p>{$item.description}</p>
-    	<h3>捐赠者介绍</h3>
-    	<p>{$item.donatorDesc}</p>
+        <h3>拍品介绍</h3>
+        <p>{$item.description}</p>
+        <h3>捐赠者介绍</h3>
+        <p>{$item.donatorDesc}</p>
     </div>
 </div>
 <script>
@@ -183,8 +186,48 @@ $(document).ready(function() {
         return i;
     }
 
-    $('#detail #want span').click(function(){
-    	$('#detail #section2').fadeToggle();
+    $('#detail #want span').click(function() {
+        $('#detail #section2').fadeToggle();
+    });
+
+    var once = true;
+
+    $('#detail #apply').click(function() {
+        if ($('#detail #section2 input[name="name"]').val() == '' || $('#detail #section2 input[name="mobile"]').val() == '' || $('#detail #section2 input[name="company"]').val() == '' || $('#detail #section2 input[name="position"]').val() == '') {
+            alert('基本信息未填写完善');
+        } else if ($('#detail #section2 input[name="price"]').val() != '') {
+            var price = parseInt($('#detail #section2 input[name="price"]').val());
+            if (price <= parseInt($('#detail #highest').text().substr(2)) || price <= parseInt($('#detail #start').text().substr(2))) {
+                alert('您的出价应高于当前最高价和起拍价');
+            } else {
+                if (once) {
+                    once = false;
+                    $('#detail #apply').text("出价成功");
+                    $('#detail #section2 .input-group').fadeOut();
+                    $.ajax({
+                        url: "{:U('Index/price')}",
+                        type: "POST",
+                        data: {
+                            name: $('#detail #section2 input[name="name"]').val(),
+                            mobile: $('#detail #section2 input[name="mobile"]').val(),
+                            company: $('#detail #section2 input[name="company"]').val(),
+                            position: $('#detail #section2 input[name="position"]').val(),
+                            price: $('#detail #section2 input[name="price"]').val(),
+                            itemId: "{$item['id']}",
+                            itemTitle: "{$item['title']}"
+                        },
+                        dataType: 'json',
+                        error: function() {},
+                        success: function() {}
+                    });
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 1000);
+                }
+            }
+        } else {
+            alert("请填写您的出价");
+        }
     });
 
 });

@@ -1,0 +1,54 @@
+<style>
+#result {
+    padding: 10px 30px 40px 30px;
+    background-color: #f4f4f4;
+}
+
+#result img {
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    box-shadow: 2px 2px 3px rgba(40, 40, 40, 0.3);
+}
+
+#result .item {
+	display: inline-block;
+	width: 46%;
+	margin-right: 4%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    font-size: 10px;
+    border-radius: 5px;
+    background-color: #fbfbfb;
+}
+
+#result .item span {
+    margin-left: 5px;
+}
+#result .item h4 {
+	margin-top: 0;
+}
+
+#result .item .item_info {
+    padding: 0px 10px;
+}
+
+#result a,
+#result a:hover {
+    text-decoration: none;
+}
+</style>
+<div id="result">
+    <h3>当前拍卖排行</h3>
+    <foreach name="items" item="v">
+        <div class="item">
+            <a href="{:U('Index/detail',array('id'=>$v['id']))}"><img src="__PUBLIC__/{$v['thumbnail']}"></a>
+            <div class="item_info">
+                <a href="{:U('Index/detail',array('id'=>$v['id']))}"><h5>{$v.title}</h5></a>
+                <p>当前最高价 <span>{$v.highest}</span></p>
+                <p>出价者 <span>{$v.owner}</span></p>
+            </div>
+        </div>
+    </foreach>
+</div>
