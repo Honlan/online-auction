@@ -6,13 +6,17 @@ class IndexController extends Controller {
     	$this->display();
     }
 
+    public function page2(){
+        $this->display();
+    }
+
+    public function page3(){
+        $this->display();
+    }
+
     public function auction(){
-    	$donation = M('item')->field('id,thumbnail,title')->where(array("category"=>"donation"))->order('highest desc')->select();
-    	$children = M('item')->field('id,thumbnail,title')->where(array("category"=>"children"))->order('highest desc')->select();
-    	$ceo = M('item')->field('id,thumbnail,title')->where(array("category"=>"ceo"))->order('highest desc')->select();
-    	$this->donation = $donation;
-    	$this->children = $children;
-    	$this->ceo = $ceo;
+    	$items = M('item')->field('id,thumbnail,title')->order('highest desc')->select();
+    	$this->items = $items;
     	$this->display();
     }
 
@@ -20,6 +24,13 @@ class IndexController extends Controller {
     	$id = I('id');
     	$item = M('item')->where(array('id'=>$id))->find();
     	$item['imgs'] = explode(',', $item['imgs']);
+        $temp = [];
+        foreach ($item['imgs'] as $key => $value) {
+            if ($value != '') {
+                $temp[] = $value;
+            }
+        }
+        $item['imgs'] = $temp;
         $this->name = '';
         $this->mobile = '';
         $this->company = '';

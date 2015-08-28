@@ -1,8 +1,6 @@
 <style>
-#index #about {
-    background-image: url(__PUBLIC__/img/about.jpg);
-    background-size: cover;
-    padding: 30px 40px;
+#index #about img {
+    width: 100%;
 }
 
 #index h1 {
@@ -10,91 +8,96 @@
     margin-top: 0;
 }
 
-#index #about>div {
-	background-color: rgba(20,20,20,0.6);
-	width: 80%;
-	margin-right: 20%;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 3px 3px 3px rgba(10,10,10,0.4);
-	margin-bottom: 40px;
-}
-#index #about h1 {
-    color: #fff;
-}
-
-#index #about p {
-    text-indent: 2em;
-    color: #f2f2f2;
-}
-
 #index #sdo {
-    padding: 30px 40px;
-    text-align: right;
-    background-color: #f4f4f4;
+    padding: 30px 50px;
+    text-align: left;
+    background-color: #f6f6f6;
+    position: relative;
+    color: #f05036;
+}
+
+#index #sdo h1 {
+    margin: 20px 0px 30px 80px;
 }
 
 #index #sdo p {
     width: 80%;
-    margin-left: 20%;
-    color: #333;
+    margin-right: 20%;
+    color: #f05036;
     text-indent: 2em;
+    text-align: left;
+}
+
+#index #sdo img {
+    position: absolute;
+    left: 50px;
+    top: 30px;
+    width: 60px;
 }
 
 #index #chba {
-    padding: 30px 40px;
-    background-color: #333;
+    padding: 20px 50px;
+    background-color: white;
+    text-align: center;
+}
+
+#index #chba img {
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
 #index #chba h1 {
-    color: #eee;
+    color: #333;
 }
 
 #index #chba p {
-    width: 80%;
-    margin-right: 20%;
-    color: #ddd;
+    color: #666;
     text-indent: 2em;
+    text-align: left;
 }
 
 #index #auction {
-    background-image: url(__PUBLIC__/img/auction.jpg);
-    background-size: cover;
+    background-color: #444;
     padding: 60px 40px;
     text-align: center;
 }
 
 #index #auction h1 {
-    color: #111;
+    color: white;
     font-size: 25px;
 }
+
 #index #auction p {
-	margin-top: 40px;
+    color: white;
+    margin-top: 40px;
 }
+
 #index #auction a {
-	text-decoration: none;
+    text-decoration: none;
 }
+
 #index #auction span {
-	color: #333;
-	border: 1px solid #666;
-	padding: 12px 15px;
-	border-radius: 3px;
+    color: white;
+    border: 1px solid white;
+    padding: 12px 15px;
+    border-radius: 5px;
 }
 </style>
 <div id="index">
     <div id="about">
-        <div>
-            <h1>成功设计慈善拍卖会</h1>
-            <p>作为一个彰显设计的价值的平台，我们在传播设计思维的同时，也致力于推动设计回归到推动社会创新的本质。此次，成功设计平台与春晖博爱儿童救助基金会合作，旨在传播创新的公益模式，帮助更多的孩子改变人生。</p>
-        </div>
+        <img src="__PUBLIC__/img/page1.jpg">
     </div>
     <div id="sdo">
         <h1>成功设计平台</h1>
-        <p>这里是介绍吧啦吧啦</p>
+        <img src="__PUBLIC__/img/sdo.png">
+        <p>作为一个彰显设计的价值的平台，我们在传播设计思维的同时，也致力于推动设计回归到推动社会创新的本质。此次平台与春晖博爱儿童救助基金会合作，旨在传播创新的公益模式，帮助更多的孩子改变人生。</p>
     </div>
     <div id="chba">
+        <img src="__PUBLIC__/img/chba.png">
         <h1>春晖博爱儿童救助基金会</h1>
-        <p>这里是介绍吧啦吧啦</p>
+        <p>春晖博爱为中国最弱势儿童提供家庭般的关爱和照料。 我们在全国各地运作并资助行之有效的养育和教育模式，挖掘、开发弱势儿童的最大潜质和潜能。 我们将永不停歇，直到每一个孩子都感受到关爱，深知自己生命的意义，并有机会为自己创造光明的未来。
+        </p>
     </div>
     <div id="auction">
         <h1>现在就加入我们</h1>

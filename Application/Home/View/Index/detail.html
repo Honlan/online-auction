@@ -1,7 +1,16 @@
 <style>
 #detail {
-    background-color: #f4f4f4;
     padding: 40px 40px 30px 40px;
+    background-image: url(__PUBLIC__/img/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#detail .item_imgs .image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
 }
 
 #detail #section1 {
@@ -90,11 +99,13 @@
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="__PUBLIC__/{$item['thumbnail']}">
+                        <div class="image" style="background-image:url(__PUBLIC__/{$item['thumbnail']})">
+                        </div>
                     </div>
                     <foreach name="item.imgs" item="i">
                         <div class="item">
-                            <img src="__PUBLIC__/{$i}">
+                            <div class="image" style="background-image:url(__PUBLIC__/{$i})">
+                            </div>
                         </div>
                     </foreach>
                 </div>
