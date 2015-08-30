@@ -43,7 +43,7 @@
     <h3>当前拍卖排行</h3>
     <foreach name="items" item="v">
         <div class="item">
-            <a href="{:U('Index/detail',array('id'=>$v['id']))}"><img src="__PUBLIC__/{$v['thumbnail']}"></a>
+            <a href="{:U('Index/detail',array('id'=>$v['id']))}"><img src="__PUBLIC__{$v['thumbnail']}"></a>
             <div class="item_info">
                 <a href="{:U('Index/detail',array('id'=>$v['id']))}"><h5>{$v.title}</h5></a>
                 <p>当前最高价 <span>{$v.highest}</span></p>
