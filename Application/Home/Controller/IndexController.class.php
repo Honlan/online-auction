@@ -51,7 +51,6 @@ class IndexController extends Controller {
         if (isset($_SESSION['position'])) {
             $this->position = $_SESSION['position'];
         }
-        echo $item['next'];
     	$this->item = $item;
     	$this->now = time();
     	$this->display();
