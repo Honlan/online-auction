@@ -32,8 +32,8 @@ class IndexController extends Controller {
         }
         $item['imgs'] = $temp;
         $item['next'] = intval($item['highest']) + intval($item['step']);
-        if ($item['next'] < $item['start']) {
-            $item['next'] = $item['start'];
+        if ($item['next'] < intval($item['start']) + intval($item['step'])) {
+            $item['next'] = intval($item['start']) + intval($item['step']);
         }
         $this->name = '';
         $this->mobile = '';
@@ -51,6 +51,7 @@ class IndexController extends Controller {
         if (isset($_SESSION['position'])) {
             $this->position = $_SESSION['position'];
         }
+        echo $item['next'];
     	$this->item = $item;
     	$this->now = time();
     	$this->display();
