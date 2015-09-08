@@ -269,11 +269,10 @@ $(document).ready(function() {
                         },
                         dataType: 'json',
                         error: function() {},
-                        success: function() {
-                            $('#owner').text($('#detail #section2 input[name="name"]').val());
-                            $('#highest').text("¥ "+$('#detail #section2 input[name="price"]').val());
-                        }
+                        success: function() {}
                     });
+                    $('#owner').text($('#detail #section2 input[name="name"]').val());
+                    $('#highest').text("¥ " + $('#detail #section2 input[name="price"]').val());
                 }
             }
         } else {
