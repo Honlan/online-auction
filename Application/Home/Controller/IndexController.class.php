@@ -15,7 +15,7 @@ class IndexController extends Controller {
     }
 
     public function auction(){
-    	$items = M('item')->field('id,thumbnail,title')->order('highest desc')->select();
+    	$items = M('item')->field('id,thumbnail,title')->order('id asc')->select();
     	$this->items = $items;
     	$this->display();
     }
@@ -31,6 +31,10 @@ class IndexController extends Controller {
             }
         }
         $item['imgs'] = $temp;
+        $item['next'] = intval($item['highest']) + intval($item['step']);
+        if ($item['next'] < $item['start']) {
+            $item['next'] = $item['start'];
+        }
         $this->name = '';
         $this->mobile = '';
         $this->company = '';

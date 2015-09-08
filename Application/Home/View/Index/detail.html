@@ -15,16 +15,23 @@
 
 #detail #section1 {
     padding-bottom: 30px;
-    border-bottom: 1px solid #D65021;
+    border-bottom: 1px solid #f05036;
+}
+
+#detail .item_basic_info p {
+    margin-bottom: 5px;
 }
 
 #detail #highest {
-    font-size: 30px;
     color: red;
     margin-left: 10px;
 }
 
 #detail #owner {
+    margin-left: 10px;
+}
+
+#detail #step {
     margin-left: 10px;
 }
 
@@ -34,6 +41,10 @@
 }
 
 #detail #donator {
+    margin-left: 10px;
+}
+
+#detail #num {
     margin-left: 10px;
 }
 
@@ -51,15 +62,15 @@
 }
 
 #detail #want span {
-    color: #D65021;
-    border: 1px solid #D65021;
+    color: #f05036;
+    border: 1px solid #f05036;
     padding: 10px 15px;
     border-radius: 5px;
 }
 
 #detail #section2 {
     padding: 30px 0px;
-    border-bottom: 1px solid #D65021;
+    border-bottom: 1px solid #f05036;
     display: none;
 }
 
@@ -75,8 +86,8 @@
 }
 
 #detail #section2 #apply {
-    color: #D65021;
-    border: 1px solid #D65021;
+    color: #f05036;
+    border: 1px solid #f05036;
     padding: 10px 15px;
     border-radius: 5px;
 }
@@ -87,11 +98,13 @@
 
 #detail #section3 {
     padding: 20px 10px;
+    padding-bottom: 0;
 }
 
 #detail #section3 p {
     text-indent: 2em;
 }
+
 #detail #next {
     position: fixed;
     top: 50%;
@@ -134,10 +147,12 @@
         </div>
         <div class="item_basic_info">
             <h3>{$item.title}</h3>
-            <p>最高价<span id="highest">¥ {$item.highest}</span></p>
-            <p>出价者<span id="owner">{$item.owner}</span></p>
-            <p>起拍价<span id="start">¥ {$item.start}</span></p>
             <p>捐赠者<span id="donator">{$item.donator}</span></p>
+            <p>最高价<span id="highest">¥ {$item.highest}</span></p>
+            <p>起拍价<span id="start">¥ {$item.start}</span></p>
+            <p>出价者<span id="owner">{$item.owner}</span></p>
+            <p>最低加价<span id="step">¥ {$item.step}</span></p>
+            <p>拍品数量<span id="num">{$item.num}</span></p>
             <p>拍卖状态<span id="status">
                     <if condition="$item.deadline gt $now">
                         拍卖中
@@ -153,7 +168,8 @@
         <form>
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-fire"></span></div>
-                <input type="text" class="form-control" name="price" placeholder="出价 price" value="{$item['highest']}">
+                <input type="text" class="form-control" name="price" placeholder="出价 price" value="{$item['next']}">
+                <p style="display:none;" id="next_price">{$item.next}</p>
             </div>
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
@@ -175,13 +191,20 @@
         </form>
     </div>
     <div id="section3">
-        <h3>拍品介绍</h3>
-        <p>{$item.description}</p>
-        <h3>捐赠者介绍</h3>
-        <p>{$item.donatorDesc}</p>
+        <if condition="$item['description']">
+            <h3>拍品介绍</h3>
+            <p>{$item.description}</p>
+        </if>
+        <if condition="$item['donatorDesc']">
+            <h3>捐赠者介绍</h3>
+            <p>{$item.donatorDesc}</p>
+        </if>
     </div>
     <div id="next">
-        <a href="{:U('Index/detail',array('id'=>(($item['id']-3+1)%8+3)))}" style="color:white;text-decoration:none;"><p style="margin-bottom:0;">下一件<br>拍品</p></a>
+        <a href="{:U('Index/detail',array('id'=>(($item['id']-3+1)%12+3)))}" style="color:white;text-decoration:none;">
+            <p style="margin-bottom:0;">下一件
+                <br>拍品</p>
+        </a>
     </div>
 </div>
 <script>
@@ -214,7 +237,7 @@ $(document).ready(function() {
     }
 
     $('#detail #want span').click(function() {
-        $('#detail #section2').fadeToggle();
+        $('#detail #section2').toggle();
     });
 
     var once = true;
@@ -224,13 +247,14 @@ $(document).ready(function() {
             alert('基本信息未填写完善');
         } else if ($('#detail #section2 input[name="price"]').val() != '') {
             var price = parseInt($('#detail #section2 input[name="price"]').val());
-            if (price <= parseInt($('#detail #highest').text().substr(2)) || price <= parseInt($('#detail #start').text().substr(2))) {
-                alert('您的出价应高于当前最高价和起拍价');
+            if (price < parseInt($('#next_price').text())) {
+                alert('对不起，您的竞价低于最低加价，请重新提交');
             } else {
                 if (once) {
                     once = false;
-                    $('#detail #apply').text("出价成功");
-                    $('#detail #section2 .input-group').fadeOut();
+                    $('#detail #apply').hide();
+                    $('#detail #section2').append("<p style='color:#f05036;text-align:center;'>您本次的竞价已经提交<br>请点击右侧“下一件拍品”继续竞拍</p>")
+                    $('#detail #section2 .input-group').hide();
                     $.ajax({
                         url: "{:U('Index/price')}",
                         type: "POST",
