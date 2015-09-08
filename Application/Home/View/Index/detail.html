@@ -118,6 +118,20 @@
     border-bottom-left-radius: 5px;
     margin-top: -25px;
 }
+
+#detail #previous {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    background-color: #f05036;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    padding-left: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin-top: -25px;
+}
 </style>
 <div id="detail">
     <div id="section1">
@@ -199,6 +213,12 @@
             <h3>捐赠者介绍</h3>
             <p>{$item.donatorDesc}</p>
         </if>
+    </div>
+    <div id="previous">
+        <a href="{:U('Index/detail',array('id'=>(($item['id']-3+11)%12+3)))}" style="color:white;text-decoration:none;">
+            <p style="margin-bottom:0;">上一件
+                <br>拍品</p>
+        </a>
     </div>
     <div id="next">
         <a href="{:U('Index/detail',array('id'=>(($item['id']-3+1)%12+3)))}" style="color:white;text-decoration:none;">
